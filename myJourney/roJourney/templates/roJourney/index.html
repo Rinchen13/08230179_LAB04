@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>My Learning Journey</title>
+  <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+<div class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="{% url 'roJourney:index' %}" class="logo">My Learning Journey</a>
+      <nav>
+        <a href="{% url 'roJourney:aboutMe' %}">About Me</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  {% if entries %}
+    {% for e in entries %}
+      <div class="journey-card animate-fade">
+        <h2>{{ e.title }}</h2>
+        <small class="year">{{ e.date }}</small>
+        <p class="lead">{{ e.content|linebreaksbr }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="journey-card animate-fade">
+      <p class="lead">No learning entries yet. Add some via the admin interface!</p>
+    </div>
+  {% endif %}
+</div>
+
+<footer class="site-footer">
+  <p>&copy; {% now "Y" %} My Learning Journey. All rights reserved.</p>
+</footer>
+</body>
+</html>
